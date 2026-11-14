@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calculadora IMC da Fenda do Biquíni</title>
+<!-- Google Fonts: Rubik & Nunito Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&amp;family=Rubik:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline-variant": "#d0c6ab",
+            "primary-fixed-dim": "#e8c400",
+            "surface-container-low": "#f6f5df",
+            "surface-container-high": "#ebe9d4",
+            "inverse-on-surface": "#f4f2dc",
+            "primary-container": "#ffd800",
+            "secondary-container": "#69e8fe",
+            "on-surface-variant": "#4d4732",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#313123",
+            "on-secondary": "#ffffff",
+            "secondary": "#006876",
+            "secondary-fixed": "#9eefff",
+            "outline": "#7e775f",
+            "on-secondary-fixed-variant": "#004e59",
+            "on-primary-fixed": "#221b00",
+            "tertiary-fixed": "#ffdad6",
+            "on-surface": "#1c1c0f",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#6f5d00",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#ffb4ac",
+            "background": "#fcfae4",
+            "on-primary-fixed-variant": "#544600",
+            "surface-variant": "#e5e3ce",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#fcfae4",
+            "primary": "#6f5d00",
+            "on-tertiary-container": "#bc181d",
+            "surface-container": "#f1efd9",
+            "surface-dim": "#dddbc6",
+            "on-primary-container": "#705e00",
+            "on-background": "#1c1c0f",
+            "secondary-fixed-dim": "#55d7ed",
+            "tertiary": "#bb171c",
+            "on-tertiary-fixed": "#410002",
+            "on-secondary-container": "#006774",
+            "surface-bright": "#fcfae4",
+            "inverse-primary": "#e8c400",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#001f24",
+            "tertiary-container": "#ffcfca",
+            "surface-container-highest": "#e5e3ce",
+            "primary-fixed": "#ffe169",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#93000d"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "margin": "1.25rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Rubik"],
+            "body-md": ["Nunito Sans"],
+            "label-lg": ["Rubik"],
+            "headline-sm": ["Rubik"],
+            "label-sm": ["Rubik"],
+            "body-lg": ["Nunito Sans"],
+            "headline-lg": ["Rubik"],
+            "body-sm": ["Nunito Sans"],
+            "display-hero": ["Rubik"],
+            "headline-md": ["Rubik"],
+            "label-md": ["Rubik"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "800" }],
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "label-lg": ["16px", { "lineHeight": "20px", "fontWeight": "800" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "800" }],
+            "body-lg": ["17px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "800" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "display-hero": ["40px", { "lineHeight": "48px", "fontWeight": "900" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "label-md": ["14px", { "lineHeight": "18px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom cartoon pop shadow classes according to style guide */
+    .pop-shadow {
+      box-shadow: 4px 4px 0px #006876;
+    }
+    .pop-shadow-lg {
+      box-shadow: 6px 6px 0px #006876;
+    }
+    .pop-shadow-sm {
+      box-shadow: 2px 2px 0px #006876;
+    }
+    .pop-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px #006876;
+    }
+    .bubble-pattern {
+      background-image: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 15%),
+                        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 25%),
+                        radial-gradient(circle at 45% 45%, rgba(0, 104, 118, 0.04) 0%, rgba(0, 104, 118, 0) 35%);
+    }
+    .sponge-holes {
+      background-image: radial-gradient(#e5c100 15%, transparent 16%),
+                        radial-gradient(#d8b500 12%, transparent 13%);
+      background-size: 60px 60px;
+      background-position: 0 0, 30px 30px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      background: #ffd800;
+      border: 3.5px solid #006876;
+      box-shadow: 2px 2px 0px #006876;
+      cursor: pointer;
+      margin-top: -10px;
+    }
+    input[type=range]::-moz-range-thumb {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      background: #ffd800;
+      border: 3.5px solid #006876;
+      box-shadow: 2px 2px 0px #006876;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- TOPNAVBAR (Shared Component) -->
+<header class="bg-surface-container dark:bg-inverse-surface border-b-[3px] border-secondary dark:border-secondary-fixed shadow-[0_4px_0px_#006876] dark:shadow-[0_4px_0px_#001f24] sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<!-- Logo & Brand Title -->
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-2xl bg-primary-container border-[3px] border-secondary flex items-center justify-center pop-shadow">
+<span class="material-symbols-outlined text-secondary text-2xl font-bold" style="font-variation-settings: 'FILL' 1;">anchor</span>
+</div>
+<div>
+<span class="font-headline-md text-headline-md font-extrabold text-secondary dark:text-secondary-fixed tracking-tight block">
+            Calculadora IMC da Fenda do Biquíni
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">water_drop</span>
+            Estação Náutica Oficial do Siri Cascudo
+          </span>
+</div>
+</div>
+<!-- Navigation Desktop (Semantical check: "Calculadora" is active) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-secondary dark:text-secondary-fixed border-b-[3.5px] border-primary-container dark:border-primary-fixed font-headline-sm pb-1 flex items-center gap-1.5" href="#calculadora">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">calculate</span>
+          Calculadora
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-lg hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#estatisticas">
+          Estatísticas
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-lg hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#hidratacao">
+          Hidratação
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-lg hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#dicas">
+          Dicas do Siri Cascudo
+        </a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-lg hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#menu">
+          Menu Nutricional
+        </a>
+</nav>
+<!-- Trailing Primary Action & Icons -->
+<div class="flex items-center gap-3">
+<button aria-label="Notificações submarinas" class="w-10 h-10 rounded-xl bg-surface-container-high border-[2.5px] border-secondary text-secondary flex items-center justify-center pop-shadow-sm hover:bg-surface-variant transition-all active:translate-y-0.5 active:shadow-none duration-150 ease-out" type="button">
+<span class="material-symbols-outlined text-lg">notifications</span>
+</button>
+<button aria-label="Âncora de emergência" class="w-10 h-10 rounded-xl bg-surface-container-high border-[2.5px] border-secondary text-secondary flex items-center justify-center pop-shadow-sm hover:bg-surface-variant transition-all active:translate-y-0.5 active:shadow-none duration-150 ease-out" type="button">
+<span class="material-symbols-outlined text-lg">anchor</span>
+</button>
+<button class="bg-primary-container text-secondary border-[3px] border-secondary px-5 py-2 rounded-xl font-label-lg text-label-lg pop-shadow hover:bg-primary-fixed transition-all active:translate-y-0.5 active:shadow-none duration-150 ease-out flex items-center gap-2" type="button">
+<span>Pronto, Capitão!</span>
+<span class="material-symbols-outlined text-base font-bold">sailing</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
+<!-- 1. HERO BANNER NÁUTICO WIDESCREEN -->
+<section class="relative overflow-hidden rounded-3xl bg-secondary border-[3.5px] border-secondary text-on-secondary p-6 md:p-8 pop-shadow-lg bubble-pattern">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="max-w-2xl text-center md:text-left">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container text-secondary border-[2.5px] border-secondary font-label-md text-label-md pop-shadow-sm mb-3">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">waves</span>
+            Relatório de Prontidão Aquática
+          </div>
+<h1 class="font-display-hero text-display-hero text-on-secondary tracking-tight drop-shadow-[0_3px_0_#004e59]">
+            Pronto, Capitão! Eu Estou Pronto!
+          </h1>
+<p class="font-body-lg text-body-lg text-secondary-fixed mt-2">
+            Meça sua densidade marinha, descubra quantos Hambúrgueres de Siri sustentam sua jornada e mantenha seu casco sempre bem hidratado nas profundezas da Fenda do Biquíni!
+          </p>
+</div>
+<!-- Decorative Nautical Badge / Character Spot -->
+<div class="flex items-center gap-3 bg-secondary-container/20 p-3 rounded-2xl border-[2.5px] border-secondary-fixed pop-shadow backdrop-blur-sm">
+<div class="w-16 h-16 rounded-full bg-primary-container border-[3px] border-secondary flex items-center justify-center text-secondary pop-shadow-sm">
+<span class="material-symbols-outlined text-3xl font-extrabold" style="font-variation-settings: 'FILL' 1;">scuba_diving</span>
+</div>
+<div class="pr-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed block">Estado de Prontidão</span>
+<span class="font-headline-sm text-headline-sm text-surface-container-lowest font-black">100% Afiado!</span>
+<span class="text-xs text-secondary-fixed-dim block">Profundidade: -120m</span>
+</div>
+</div>
+</div>
+<!-- Water Bubble Decorative Accents -->
+<div class="absolute -right-8 -bottom-10 w-44 h-44 rounded-full bg-secondary-container/25 pointer-events-none border-4 border-secondary-fixed/40"></div>
+<div class="absolute left-1/3 -top-12 w-28 h-28 rounded-full bg-white/10 pointer-events-none"></div>
+</section>
+<!-- 12-COLUMN DASHBOARD GRID -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- COLUNA ESQUERDA (5 Colunas): Painel de Entrada e Medição 'Dados do Tripulante' -->
+<section class="lg:col-span-5 bg-surface-container-lowest rounded-3xl border-[3.5px] border-secondary p-6 pop-shadow-lg flex flex-col gap-6" id="calculadora">
+<!-- Header da Coluna -->
+<div class="flex items-center justify-between border-b-[2.5px] border-surface-container pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container border-[2.5px] border-secondary flex items-center justify-center text-secondary pop-shadow-sm">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">id_card</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-secondary font-black">Dados do Tripulante</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Parâmetros biométricos de fundo do mar</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-40 text-2xl">compass_calibration</span>
+</div>
+<!-- 1. Campo de Peso Corporal (Quilos / kg) -->
+<div class="bg-surface-container-low rounded-2xl border-[2.5px] border-secondary p-4 pop-shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<label class="font-label-lg text-label-lg text-secondary flex items-center gap-1.5" for="weightInput">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">scale</span>
+              Peso Corporal do Mergulhador
+            </label>
+<span class="text-xs font-label-md text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full border border-secondary font-bold">Unidade: kg</span>
+</div>
+<div class="flex items-center justify-between gap-4">
+<button class="pop-btn w-12 h-12 rounded-xl bg-surface-container-highest border-[2.5px] border-secondary text-secondary font-headline-md pop-shadow-sm flex items-center justify-center hover:bg-secondary-fixed transition-colors" id="btnMinusWeight" type="button">
+<span class="material-symbols-outlined text-2xl font-black">remove</span>
+</button>
+<div class="flex-1 bg-surface-container-lowest border-[2.5px] border-secondary rounded-2xl py-2 px-4 text-center pop-shadow-sm">
+<div class="flex items-baseline justify-center gap-1">
+<span class="font-display-hero text-display-hero text-secondary font-black" id="weightDisplay">68</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant font-bold">kg</span>
+</div>
+</div>
+<button class="pop-btn w-12 h-12 rounded-xl bg-surface-container-highest border-[2.5px] border-secondary text-secondary font-headline-md pop-shadow-sm flex items-center justify-center hover:bg-secondary-fixed transition-colors" id="btnPlusWeight" type="button">
+<span class="material-symbols-outlined text-2xl font-black">add</span>
+</button>
+</div>
+<!-- Seletor Rápido de Peso -->
+<div class="flex items-center justify-between gap-2 pt-1">
+<span class="text-xs font-label-sm text-on-surface-variant">Rápido:</span>
+<div class="flex gap-2">
+<button class="weight-preset px-3 py-1 rounded-full text-xs font-label-md border-[2px] border-secondary bg-surface-container hover:bg-primary-container text-secondary transition-colors" data-val="50" type="button">50 kg</button>
+<button class="weight-preset px-3 py-1 rounded-full text-xs font-label-md border-[2px] border-secondary bg-primary-container text-secondary font-bold shadow-[2px_2px_0_#006876] transition-colors" data-val="68" type="button">68 kg</button>
+<button class="weight-preset px-3 py-1 rounded-full text-xs font-label-md border-[2px] border-secondary bg-surface-container hover:bg-primary-container text-secondary transition-colors" data-val="80" type="button">80 kg</button>
+<button class="weight-preset px-3 py-1 rounded-full text-xs font-label-md border-[2px] border-secondary bg-surface-container hover:bg-primary-container text-secondary transition-colors" data-val="95" type="button">95 kg</button>
+</div>
+</div>
+</div>
+<!-- 2. Campo de Altura ('Régua de Algas do Fundo do Mar') -->
+<div class="bg-surface-container-low rounded-2xl border-[2.5px] border-secondary p-4 pop-shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<label class="font-label-lg text-label-lg text-secondary flex items-center gap-1.5" for="heightRange">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">straighten</span>
+              Régua de Algas do Fundo do Mar
+            </label>
+<div class="bg-primary-container border-[2px] border-secondary px-3 py-0.5 rounded-full pop-shadow-sm">
+<span class="font-headline-sm text-headline-sm text-secondary font-black" id="heightDisplay">170 cm</span>
+</div>
+</div>
+<!-- Slider Náutico -->
+<div class="py-2 px-1">
+<input class="w-full h-4 bg-surface-container-highest rounded-full border-[2.5px] border-secondary appearance-none cursor-pointer" id="heightRange" max="230" min="80" type="range" value="170"/>
+</div>
+<!-- Personagens de Referência de Altura -->
+<div class="grid grid-cols-3 gap-2 pt-1 border-t-[1.5px] border-secondary/20">
+<div class="text-center p-1 rounded-xl bg-surface-container-lowest border border-secondary/40">
+<span class="block text-xs font-bold text-secondary">100 cm</span>
+<span class="text-[11px] text-on-surface-variant leading-none flex items-center justify-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-xs text-primary">bug_report</span>
+                Plankton
+              </span>
+</div>
+<div class="text-center p-1 rounded-xl bg-primary-container/40 border border-secondary">
+<span class="block text-xs font-bold text-secondary">170 cm</span>
+<span class="text-[11px] text-secondary font-bold leading-none flex items-center justify-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">sentiment_satisfied</span>
+                Bob Esponja
+              </span>
+</div>
+<div class="text-center p-1 rounded-xl bg-surface-container-lowest border border-secondary/40">
+<span class="block text-xs font-bold text-secondary">220 cm</span>
+<span class="text-[11px] text-on-surface-variant leading-none flex items-center justify-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-xs text-tertiary">fitness_center</span>
+                Larry Lagosta
+              </span>
+</div>
+</div>
+</div>
+<!-- 3. Seletor de Nível de Atividade física ('Rotina na Fenda do Biquíni') -->
+<div class="bg-surface-container-low rounded-2xl border-[2.5px] border-secondary p-4 pop-shadow-sm flex flex-col gap-3">
+<label class="font-label-lg text-label-lg text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">surfing</span>
+            Rotina na Fenda do Biquíni
+          </label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="activityRadioGroup">
+<label class="activity-card cursor-pointer border-[2.5px] border-secondary bg-surface-container-lowest rounded-xl p-3 flex items-start gap-2.5 hover:bg-surface-container transition-all pop-shadow-sm">
+<input class="mt-1 text-secondary focus:ring-0" name="activity" type="radio" value="1.2"/>
+<div>
+<span class="font-label-md text-label-md text-secondary block font-bold">Dormir na Pedra</span>
+<span class="text-xs text-on-surface-variant leading-tight block">Sedentário como o Patrick Estrela</span>
+</div>
+</label>
+<label class="activity-card cursor-pointer border-[2.5px] border-secondary bg-primary-container/40 rounded-xl p-3 flex items-start gap-2.5 hover:bg-primary-container transition-all pop-shadow-sm border-secondary">
+<input checked="" class="mt-1 text-secondary focus:ring-0" name="activity" type="radio" value="1.375"/>
+<div>
+<span class="font-label-md text-label-md text-secondary block font-bold">Virar Hambúrguer</span>
+<span class="text-xs text-on-surface-variant leading-tight block">Moderado no Siri Cascudo</span>
+</div>
+</label>
+<label class="activity-card cursor-pointer border-[2.5px] border-secondary bg-surface-container-lowest rounded-xl p-3 flex items-start gap-2.5 hover:bg-surface-container transition-all pop-shadow-sm">
+<input class="mt-1 text-secondary focus:ring-0" name="activity" type="radio" value="1.55"/>
+<div>
+<span class="font-label-md text-label-md text-secondary block font-bold">Caçar Águas-Vivas</span>
+<span class="text-xs text-on-surface-variant leading-tight block">Corrida ágil pelos campos</span>
+</div>
+</label>
+<label class="activity-card cursor-pointer border-[2.5px] border-secondary bg-surface-container-lowest rounded-xl p-3 flex items-start gap-2.5 hover:bg-surface-container transition-all pop-shadow-sm">
+<input class="mt-1 text-secondary focus:ring-0" name="activity" type="radio" value="1.725"/>
+<div>
+<span class="font-label-md text-label-md text-secondary block font-bold">Karatê com a Sandy</span>
+<span class="text-xs text-on-surface-variant leading-tight block">Treino militar da cúpula de ar</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Botões de Ação Widescreen -->
+<div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+<button class="pop-btn w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-primary-container border-[3.5px] border-secondary text-secondary font-headline-sm text-headline-sm pop-shadow hover:bg-primary-fixed transition-all flex items-center justify-center gap-2" id="btnCalculate" type="button">
+<span class="text-2xl">🍔</span>
+<span>Calcular IMC</span>
+</button>
+<button class="pop-btn w-full sm:w-auto py-3.5 px-5 rounded-2xl bg-surface-container-high border-[2.5px] border-secondary text-secondary font-label-lg text-label-lg pop-shadow hover:bg-surface-variant transition-all flex items-center justify-center gap-1.5" id="btnReset" type="button">
+<span class="material-symbols-outlined text-lg">autorenew</span>
+<span>Limpar Dados</span>
+</button>
+</div>
+</section>
+<!-- COLUNA DIREITA (7 Colunas): Escotilha de Diagnóstico e Métricas Submarinas -->
+<section class="lg:col-span-7 flex flex-col gap-6">
+<!-- CARD PRINCIPAL: Escotilha de Diagnóstico do IMC -->
+<div class="bg-surface-container-lowest rounded-3xl border-[3.5px] border-secondary p-6 pop-shadow-lg flex flex-col gap-6 relative overflow-hidden">
+<div class="flex items-center justify-between border-b-[2.5px] border-surface-container pb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container border-[2.5px] border-secondary flex items-center justify-center text-secondary pop-shadow-sm">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-secondary font-black">Escotilha de Diagnóstico do IMC</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Classificação oficial pelo Conselho Naval da Fenda</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1 bg-surface-container-high px-3 py-1 rounded-full border border-secondary text-xs font-bold text-secondary">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Sensor Pressurizado
+            </div>
+</div>
+<!-- Escotilha Submarina Centralizada -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6 py-2">
+<!-- Escotilha com Rebites e Gradiente -->
+<div class="relative w-48 h-48 rounded-full bg-secondary border-[6px] border-secondary-container p-2 flex items-center justify-center pop-shadow-lg">
+<!-- Rebites náuticos decorativos -->
+<div class="absolute top-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-surface-container-lowest border border-secondary"></div>
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-surface-container-lowest border border-secondary"></div>
+<div class="absolute left-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-surface-container-lowest border border-secondary"></div>
+<div class="absolute right-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-surface-container-lowest border border-secondary"></div>
+<!-- Vidro da Escotilha -->
+<div class="w-full h-full rounded-full bg-secondary-fixed/30 border-[3px] border-secondary flex flex-col items-center justify-center p-4 text-center backdrop-blur-sm shadow-[inset_0_4px_8px_rgba(0,104,118,0.4)]">
+<span class="font-label-sm text-label-sm text-secondary-container uppercase tracking-wider font-extrabold">Seu IMC Náutico</span>
+<span class="font-display-hero text-4xl text-surface-container-lowest font-black tracking-tight drop-shadow-[0_2px_0_#004e59]" id="imcValue">23.5</span>
+<span class="text-xs text-secondary-fixed font-bold">kg / m²</span>
+</div>
+</div>
+<!-- Diagnóstico e Parecer Naval -->
+<div class="flex-1 flex flex-col gap-2 text-center sm:text-left">
+<div class="inline-flex self-center sm:self-start items-center gap-2 px-3 py-1 rounded-full bg-primary-container border-[2.5px] border-secondary text-secondary font-label-md text-label-md pop-shadow-sm">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span id="imcCategory">Na medida como o Bob Esponja!</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-secondary font-black" id="imcVerdict">
+                Densidade Perfeita para Flutuação!
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant" id="imcDescription">
+                Seu peso está balanceado perfeitamente com sua altura aquática. Sua esponja corporal absorve a quantidade exata de água salgada para manter a agilidade no Siri Cascudo!
+              </p>
+<div class="flex items-center justify-center sm:justify-start gap-4 text-xs font-bold text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">anchor</span>
+                  Faixa Ideal: 18.5 - 24.9
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">favorite</span>
+                  Saúde: Excelente
+                </span>
+</div>
+</div>
+</div>
+<!-- Barra de Densidade Submarina Multicolorida -->
+<div class="flex flex-col gap-2 pt-2 border-t-[2.5px] border-surface-container">
+<div class="flex justify-between items-center text-xs font-label-md text-secondary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">water</span>
+                Escala de Densidade Submarina da Fenda
+              </span>
+<span class="text-on-surface-variant text-[11px]">Marcadores oficiais</span>
+</div>
+<!-- Trilho Multicolorido com Indicador -->
+<div class="relative pt-6">
+<!-- Marcador Flutuante / Ponteiro -->
+<div class="absolute top-0 -translate-x-1/2 transition-all duration-300 flex flex-col items-center z-20" id="gaugePointer" style="left: 45%;">
+<div class="w-8 h-8 rounded-full bg-primary-container border-[2.5px] border-secondary flex items-center justify-center pop-shadow-sm">
+<span class="material-symbols-outlined text-secondary text-sm font-black" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+</div>
+</div>
+<!-- Faixas de Cores -->
+<div class="grid grid-cols-4 h-6 w-full rounded-full border-[3px] border-secondary overflow-hidden pop-shadow-sm">
+<!-- Plankton -->
+<div class="bg-[#7CB342] flex items-center justify-center text-[10px] font-black text-white" title="Plankton (&lt; 18.5)">
+                  &lt; 18.5
+                </div>
+<!-- Bob Esponja -->
+<div class="bg-primary-container flex items-center justify-center text-[10px] font-black text-secondary border-l-[2px] border-r-[2px] border-secondary" title="Bob Esponja (18.5 - 24.9)">
+                  18.5 - 24.9
+                </div>
+<!-- Patrick -->
+<div class="bg-[#FF8A80] flex items-center justify-center text-[10px] font-black text-tertiary-container border-r-[2px] border-secondary" title="Patrick Estrela (25.0 - 29.9)">
+                  25 - 29.9
+                </div>
+<!-- Sra Puff -->
+<div class="bg-[#BA68C8] flex items-center justify-center text-[10px] font-black text-white" title="Sra. Puff (≥ 30.0)">
+                  ≥ 30.0
+                </div>
+</div>
+<!-- Legenda dos Personagens -->
+<div class="grid grid-cols-4 text-center mt-2 gap-1">
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-black block">Plankton</span>
+<span class="text-[11px] text-on-surface-variant block">Abaixo do peso</span>
+</div>
+<div class="bg-primary-container/30 rounded-lg py-0.5 border border-secondary">
+<span class="font-label-sm text-label-sm text-secondary font-black block">Bob Esponja</span>
+<span class="text-[11px] text-secondary font-bold block">Saudável</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-black block">Patrick</span>
+<span class="text-[11px] text-on-surface-variant block">Sobrepeso</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary font-black block">Sra. Puff</span>
+<span class="text-[11px] text-on-surface-variant block">Densidade Alta</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SUB-PAINEL COM MÉTRICAS COMPLEMENTARES (Grid de 2 Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Card 1: Hidratação Aquática do Oceano -->
+<div class="bg-surface-container-lowest rounded-3xl border-[3.5px] border-secondary p-5 pop-shadow-lg flex flex-col justify-between gap-4" id="hidratacao">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-secondary-container border-[2px] border-secondary flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-secondary font-black">Hidratação Oceânica</h3>
+</div>
+<span class="font-label-md text-secondary font-bold bg-secondary-fixed/60 px-2 py-0.5 rounded-full border border-secondary" id="hydrationTotal">1500 / 2500 ml</span>
+</div>
+<p class="text-xs text-on-surface-variant">Meta calculada para absorção de sua esponja marinha:</p>
+</div>
+<!-- Copos Interativos de 500ml -->
+<div class="flex items-center justify-between gap-1.5 py-1">
+<button class="water-glass flex-1 flex flex-col items-center gap-1 p-1.5 rounded-xl border-[2px] border-secondary bg-secondary-fixed text-secondary pop-shadow-sm transition-all" data-glass="1" type="button">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+<span class="text-[10px] font-bold">500ml</span>
+</button>
+<button class="water-glass flex-1 flex flex-col items-center gap-1 p-1.5 rounded-xl border-[2px] border-secondary bg-secondary-fixed text-secondary pop-shadow-sm transition-all" data-glass="2" type="button">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+<span class="text-[10px] font-bold">500ml</span>
+</button>
+<button class="water-glass flex-1 flex flex-col items-center gap-1 p-1.5 rounded-xl border-[2px] border-secondary bg-secondary-fixed text-secondary pop-shadow-sm transition-all" data-glass="3" type="button">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+<span class="text-[10px] font-bold">500ml</span>
+</button>
+<button class="water-glass flex-1 flex flex-col items-center gap-1 p-1.5 rounded-xl border-[2px] border-secondary bg-surface-container-high text-on-surface-variant transition-all" data-glass="4" type="button">
+<span class="material-symbols-outlined text-2xl">local_drink</span>
+<span class="text-[10px] font-bold">500ml</span>
+</button>
+<button class="water-glass flex-1 flex flex-col items-center gap-1 p-1.5 rounded-xl border-[2px] border-secondary bg-surface-container-high text-on-surface-variant transition-all" data-glass="5" type="button">
+<span class="material-symbols-outlined text-2xl">local_drink</span>
+<span class="text-[10px] font-bold">500ml</span>
+</button>
+</div>
+<div class="flex items-center justify-between text-xs text-secondary font-bold pt-1 border-t border-surface-container">
+<span>Status: <strong class="text-secondary font-black">Casco Hidratado</strong></span>
+<button class="text-secondary hover:underline flex items-center gap-0.5" id="btnAddWater" type="button">
+<span class="material-symbols-outlined text-sm">add_circle</span> Beber +500ml
+              </button>
+</div>
+</div>
+<!-- Card 2: Taxa Metabólica do Siri Cascudo -->
+<div class="bg-surface-container-lowest rounded-3xl border-[3.5px] border-secondary p-5 pop-shadow-lg flex flex-col justify-between gap-4" id="menu">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-primary-container border-[2px] border-secondary flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">lunch_dining</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-secondary font-black">Metabolismo do Siri</h3>
+</div>
+<span class="text-xs font-bold text-secondary bg-primary-container px-2 py-0.5 rounded-full border border-secondary">Equivalência</span>
+</div>
+<p class="text-xs text-on-surface-variant">Gasto energético convertido na moeda da Fenda:</p>
+</div>
+<div class="bg-surface-container-low rounded-2xl border-[2px] border-secondary p-3 flex items-center justify-between">
+<div>
+<span class="text-xs font-bold text-on-surface-variant block">Energia Diária Estimada</span>
+<span class="font-headline-md text-headline-md text-secondary font-black" id="caloricDisplay">2.140 kcal</span>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold text-on-surface-variant block">Consumo Diário:</span>
+<div class="flex items-center gap-1 text-secondary font-black">
+<span class="font-display-hero text-2xl text-secondary" id="burgerCount">4.3</span>
+<span class="text-xl">🍔</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-secondary font-bold pt-1 border-t border-surface-container">
+<span>Hambúrgueres de Siri recomendados</span>
+<span class="text-on-surface-variant">~498 kcal cada</span>
+</div>
+</div>
+</div>
+<!-- CARD CONSELHO SECRETO DO SIRI CASCUDO -->
+<div class="bg-primary-container rounded-3xl border-[3.5px] border-secondary p-6 pop-shadow-lg relative overflow-hidden sponge-holes" id="dicas">
+<div class="relative z-10 flex flex-col sm:flex-row items-center gap-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-lowest border-[3px] border-secondary flex items-center justify-center text-tertiary pop-shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-3xl font-black" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-2 mb-1">
+<span class="font-headline-sm text-headline-sm text-secondary font-black">Conselho Secreto do Siri Cascudo</span>
+<span class="bg-secondary text-surface-container-lowest text-[10px] font-black uppercase px-2 py-0.5 rounded-full">Top Secret</span>
+</div>
+<p class="font-body-md text-body-md text-secondary font-bold">
+                "Menino Bob Esponja diz: Nunca pule o aquecimento das nadadeiras antes de pegar na espátula! E o Seu Sirigueijo lembra: gastar calorias nadando é bom, mas gastar dinheiro à toa é proibido, capitão!"
+              </p>
+<div class="flex items-center justify-center sm:justify-start gap-3 mt-2 text-xs font-black text-secondary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> Sandy aprovou este treino
+                </span>
+<span>•</span>
+<span>Receita Secreta Protegida 🔒</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- FOOTER (Shared Component) -->
+<footer class="bg-surface-container-high dark:bg-inverse-surface border-t-[3px] border-secondary dark:border-secondary-fixed shadow-[inset_0_4px_0px_rgba(255,255,255,0.6)] mt-8">
+<div class="w-full py-8 px-6 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<!-- Brand & Copyright -->
+<div class="text-center md:text-left">
+<span class="font-headline-sm text-headline-sm font-extrabold text-secondary dark:text-secondary-fixed block">
+          Calculadora IMC da Fenda do Biquíni
+        </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant mt-1">
+          © Fenda do Biquíni Fitness &amp; Siri Cascudo Nutrição Marítima. Todos os direitos reservados capitão!
+        </p>
+</div>
+<!-- Footer Nautical Links -->
+<div class="flex flex-wrap justify-center items-center gap-4 text-secondary dark:text-secondary-fixed font-label-md text-label-md">
+<a class="hover:text-primary dark:hover:text-primary-fixed underline transition-colors" href="#termos">Termos de Navegação</a>
+<span>•</span>
+<a class="hover:text-primary dark:hover:text-primary-fixed underline transition-colors" href="#manual">Manual da Sra. Puff</a>
+<span>•</span>
+<a class="hover:text-primary dark:hover:text-primary-fixed underline transition-colors" href="#receita">Receita Secreta</a>
+<span>•</span>
+<a class="hover:text-primary dark:hover:text-primary-fixed underline transition-colors" href="#tabela">Tabela Calórica do Hambúrguer de Siri</a>
+</div>
+</div>
+</footer>
+<!-- TACTILE INTERACTIVITY LOGIC -->
+<script>
+    // Elements
+    let currentWeight = 68;
+    let currentHeight = 170;
+    let currentWater = 3; // 3 glasses of 500ml = 1500ml
+
+    const weightDisplay = document.getElementById('weightDisplay');
+    const heightDisplay = document.getElementById('heightDisplay');
+    const heightRange = document.getElementById('heightRange');
+    const imcValue = document.getElementById('imcValue');
+    const imcCategory = document.getElementById('imcCategory');
+    const imcVerdict = document.getElementById('imcVerdict');
+    const imcDescription = document.getElementById('imcDescription');
+    const gaugePointer = document.getElementById('gaugePointer');
+    const caloricDisplay = document.getElementById('caloricDisplay');
+    const burgerCount = document.getElementById('burgerCount');
+    const hydrationTotal = document.getElementById('hydrationTotal');
+
+    function calculateAndRender() {
+      const heightInMeters = currentHeight / 100;
+      const imc = (currentWeight / (heightInMeters * heightInMeters)).toFixed(1);
+      imcValue.textContent = imc;
+
+      // Activity factor from selected radio
+      const selectedActivity = parseFloat(document.querySelector('input[name="activity"]:checked')?.value || '1.375');
+      
+      // Harris-Benedict approximate formula
+      const bmr = (10 * currentWeight) + (6.25 * currentHeight) - (5 * 25) + 5;
+      const tdee = Math.round(bmr * selectedActivity);
+      caloricDisplay.textContent = `${tdee.toLocaleString('pt-BR')} kcal`;
+
+      // Burger ratio (1 Krabby Patty ≈ 498 kcal)
+      const burgers = (tdee / 498).toFixed(1);
+      burgerCount.textContent = burgers;
+
+      // Character & Category Logic
+      if (imc < 18.5) {
+        imcCategory.textContent = 'Abaixo do peso como o Plankton!';
+        imcVerdict.textContent = 'Alerta de Densidade Leve!';
+        imcDescription.textContent = 'Você está tão leve que uma correnteza mais forte do Siri Cascudo pode te levar! Precisa reforçar os Hambúrgueres de Siri.';
+        gaugePointer.style.left = '12%';
+      } else if (imc >= 18.5 && imc <= 24.9) {
+        imcCategory.textContent = 'Na medida como o Bob Esponja!';
+        imcVerdict.textContent = 'Densidade Perfeita para Flutuação!';
+        imcDescription.textContent = 'Seu peso está balanceado perfeitamente com sua altura aquática. Sua esponja corporal absorve a quantidade exata de água salgada para manter a agilidade no Siri Cascudo!';
+        gaugePointer.style.left = '37%';
+      } else if (imc >= 25.0 && imc <= 29.9) {
+        imcCategory.textContent = 'Robusto como o Patrick Estrela!';
+        imcVerdict.textContent = 'Densidade Elevada nas Nadadeiras!';
+        imcDescription.textContent = 'Você tem bastante reserva para aguentar o inverno submarino, mas caçar umas águas-vivas no campo vai acelerar seu casco!';
+        gaugePointer.style.left = '62%';
+      } else {
+        imcCategory.textContent = 'Densidade Máxima como a Sra. Puff!';
+        imcVerdict.textContent = 'Escotilha em Expansão Total!';
+        imcDescription.textContent = 'Cuidado com os sustos náuticos! É hora de fazer aulas de hidroginástica náutica com a Sandy Bochechas para desinflar a boia!';
+        gaugePointer.style.left = '87%';
+      }
+    }
+
+    // Weight controls
+    document.getElementById('btnMinusWeight').addEventListener('click', () => {
+      if (currentWeight > 30) {
+        currentWeight -= 1;
+        weightDisplay.textContent = currentWeight;
+        calculateAndRender();
+      }
+    });
+
+    document.getElementById('btnPlusWeight').addEventListener('click', () => {
+      if (currentWeight < 200) {
+        currentWeight += 1;
+        weightDisplay.textContent = currentWeight;
+        calculateAndRender();
+      }
+    });
+
+    // Quick presets
+    document.querySelectorAll('.weight-preset').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        currentWeight = parseInt(e.target.dataset.val);
+        weightDisplay.textContent = currentWeight;
+        
+        document.querySelectorAll('.weight-preset').forEach(b => {
+          b.classList.remove('bg-primary-container', 'shadow-[2px_2px_0_#006876]', 'font-bold');
+          b.classList.add('bg-surface-container');
+        });
+        e.target.classList.add('bg-primary-container', 'shadow-[2px_2px_0_#006876]', 'font-bold');
+        e.target.classList.remove('bg-surface-container');
+        
+        calculateAndRender();
+      });
+    });
+
+    // Height range
+    heightRange.addEventListener('input', (e) => {
+      currentHeight = parseInt(e.target.value);
+      heightDisplay.textContent = `${currentHeight} cm`;
+      calculateAndRender();
+    });
+
+    // Activity cards radio updates
+    document.querySelectorAll('input[name="activity"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.querySelectorAll('.activity-card').forEach(card => {
+          card.classList.remove('bg-primary-container/40');
+          card.classList.add('bg-surface-container-lowest');
+        });
+        radio.closest('.activity-card').classList.add('bg-primary-container/40');
+        radio.closest('.activity-card').classList.remove('bg-surface-container-lowest');
+        calculateAndRender();
+      });
+    });
+
+    // Calculate action button
+    document.getElementById('btnCalculate').addEventListener('click', () => {
+      calculateAndRender();
+      // Scroll smoothly to diagnostic hatch on mobile
+      if (window.innerWidth < 1024) {
+        imcValue.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // Reset action button
+    document.getElementById('btnReset').addEventListener('click', () => {
+      currentWeight = 68;
+      currentHeight = 170;
+      weightDisplay.textContent = currentWeight;
+      heightDisplay.textContent = `${currentHeight} cm`;
+      heightRange.value = 170;
+      document.querySelector('input[name="activity"][value="1.375"]').checked = true;
+      
+      document.querySelectorAll('.activity-card').forEach(card => {
+        card.classList.remove('bg-primary-container/40');
+        card.classList.add('bg-surface-container-lowest');
+      });
+      document.querySelector('input[name="activity"][value="1.375"]').closest('.activity-card').classList.add('bg-primary-container/40');
+
+      calculateAndRender();
+    });
+
+    // Hydration interaction
+    const waterGlasses = document.querySelectorAll('.water-glass');
+    function updateWater(glasses) {
+      currentWater = glasses;
+      hydrationTotal.textContent = `${currentWater * 500} / 2500 ml`;
+      waterGlasses.forEach(btn => {
+        const num = parseInt(btn.dataset.glass);
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (num <= currentWater) {
+          btn.classList.add('bg-secondary-fixed', 'text-secondary', 'pop-shadow-sm');
+          btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+          icon.style.fontVariationSettings = "'FILL' 1";
+        } else {
+          btn.classList.remove('bg-secondary-fixed', 'text-secondary', 'pop-shadow-sm');
+          btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+          icon.style.fontVariationSettings = "'FILL' 0";
+        }
+      });
+    }
+
+    waterGlasses.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetGlass = parseInt(btn.dataset.glass);
+        updateWater(targetGlass);
+      });
+    });
+
+    document.getElementById('btnAddWater').addEventListener('click', () => {
+      if (currentWater < 5) {
+        updateWater(currentWater + 1);
+      }
+    });
+
+    // Initial calculation on load
+    calculateAndRender();
+  </script>
+</body></html>
